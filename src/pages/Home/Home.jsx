@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 const Home = () => {
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
+
     if (savedTasks) {
       return JSON.parse(savedTasks).map((task) => ({
         name: task,
         isEditing: false,
+        isCompleted: false,
       }));
     } else {
       return [];
@@ -47,6 +49,12 @@ const Home = () => {
     setTasks(newTasks);
   };
 
+  const toggleCompletion = (index) => {
+    const newTasks = [...tasks];
+    newTasks[index].isCompleted = !newTasks[index].isCompleted;
+    setTasks(newTasks);
+  };
+
   return (
     <div className="flex flex-col justify-center items-center h-auto my-5">
       <div className="flex gap-4">
@@ -82,7 +90,7 @@ const Home = () => {
                       Delete
                     </th>
                     <th scope="col" className="px-6 py-4">
-                      Mark as complete
+                      Status
                     </th>
                   </tr>
                 </thead>
@@ -101,6 +109,7 @@ const Home = () => {
                             type="text"
                             value={task.name}
                             onChange={(e) => updateTask(index, e.target.value)}
+                            className="bg-neutral-100"
                           />
                         ) : (
                           task.name
@@ -118,7 +127,15 @@ const Home = () => {
                         </button>
                       </td>
                       <td className="whitespace-normal px-6 py-4">
-                        Mark as complete
+                        {task.isCompleted ? "Completed" : "Not Completed"}
+                        <button
+                          onClick={() => toggleCompletion(index)}
+                          className="ml-2 text-blue-500"
+                        >
+                          {task.isCompleted
+                            ? "Mark as Incomplete"
+                            : "Mark as complete"}
+                        </button>
                       </td>
                     </tr>
                   ))}
