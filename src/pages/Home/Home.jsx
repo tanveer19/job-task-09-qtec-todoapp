@@ -121,7 +121,7 @@ const Home = () => {
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div className="">
                 <table className="overflow-auto text-left text-sm font-light">
-                  <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                  <thead className="border-b bg-white font-medium ">
                     <tr>
                       <th scope="col" className="px-6 py-4">
                         #
@@ -146,10 +146,7 @@ const Home = () => {
                   </thead>
                   <tbody>
                     {tasks.map((task, index) => (
-                      <tr
-                        key={index}
-                        className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700"
-                      >
+                      <tr key={index} className="border-b bg-neutral-100 ">
                         <td className="whitespace-normal px-6 py-4 font-medium">
                           {index + 1}
                         </td>
